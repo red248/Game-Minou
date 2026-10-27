@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Minou</title>
+  <meta name="description" content="Jeux pour apprendre, de 4 à 7 ans">
+  <meta name="theme-color" content="#5b8def">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Minou">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="icon" type="image/png" href="icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css?v=__VERSION__">
+</head>
+<body>
+  <div id="loading"><div class="loading-cat">🐱</div><div>Chargement…</div></div>
+  <script type="module">
+    import init from './minou.js?v=__VERSION__';
+    init({ module_or_path: './minou_bg.wasm?v=__VERSION__' });
+    if ('serviceWorker' in navigator && location.protocol === 'https:') {
+      navigator.serviceWorker.register('./sw.js');
+    }
+    // iOS: block pinch zoom and double-tap zoom inside the app.
+    document.addEventListener('gesturestart', e => e.preventDefault());
+    // Load voices early (Safari fills the list asynchronously).
+    if ('speechSynthesis' in window) { speechSynthesis.getVoices(); }
+  </script>
+</body>
+</html>
